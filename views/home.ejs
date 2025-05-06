@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><title>Home</title></head>
+<body>
+  <% if (!user) { %>
+    <a href="/views/signup.ejs">Sign up</a><br>
+    <a href="/views/login.ejs">Log in</a>
+  <% } else { %>
+    <h2>Hello, <%= user.name %>!</h2>
+    <a href="/views/members.ejs">Go to Members Area</a><br>
+    <a href="/views/logout.ejs">Logout</a>
+  <% } %>
+</body>
+</html>
