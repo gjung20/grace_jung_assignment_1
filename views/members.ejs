@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><title>Members Area</title></head>
+<head>
+  <title>Members</title>
+</head>
 <body>
-  <h1>Welcome to the Members Area, <%= user.name %>!</h1>
-  <p>This page is only accessible to logged-in users.</p>
-  <a href="/">Back to Home</a><br>
-  <a href="/logout">Logout</a>
+  <h1>Hello, <%= user.name %>.</h1>
+  <img src="/<%= image %>" alt="Random Cat" style="max-width: 400px;">
+  <br>
+  <a href="/logout"><button>Sign out</button></a>
 </body>
 </html>
