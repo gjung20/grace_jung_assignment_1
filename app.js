@@ -103,23 +103,38 @@ connectToDatabase().then(database => {
     res.redirect('/');
   });  
 
-  app.get('/login', (req, res) => res.render('login'));
-  
-  app.post('/login', async (req, res) => {
+  app.get('/login', (req, res) => {
+    // Pass an empty error initially
+    res.render('login', { error: null });
+});
+
+app.post('/login', async (req, res) => {
     const { email, password } = req.body;
-  
+
     const { error } = loginSchema.validate(req.body);
-    if (error) return res.status(400).send("Invalid input.");
-  
+    if (error) {
+        return res.render('login', { 
+            error: "Invalid input format. Please check your email and password." 
+        });
+    }
+
     const user = await usersCollection.findOne({ email });
-    if (!user) return res.send('Invalid email or password');
-  
+    if (!user) {
+        return res.render('login', { 
+            error: "Invalid email/password combination" 
+        });
+    }
+
     const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.send('Invalid email or password');
-  
-    req.session.user = { name: user.name, email: user.email }; // Don't store hashed password in session
+    if (!match) {
+        return res.render('login', { 
+            error: "Invalid email/password combination" 
+        });
+    }
+
+    req.session.user = { name: user.name, email: user.email };
     res.redirect('/');
-  });  
+}); 
 
   app.get('/logout', (req, res) => {
     req.session.destroy(() => res.redirect('/'));

@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Members</title>
+    <title>Members Area</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <h1>Hello, <%= user.name %>.</h1>
-  <img src="/<%= image %>" alt="Random Cat" style="max-width: 400px;">
-  <br>
-  <a href="/logout"><button>Sign out</button></a>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div class="members-container">
+        <h1>Welcome to the Members Area, <%= user.name %>!</h1>
+        <p>Here's your special content:</p>
+        <img src="/<%= image %>" alt="Random Cat" class="members-image">
+    </div>
 </body>
 </html>
