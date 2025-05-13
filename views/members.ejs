@@ -1,19 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Members Area</title>
-    <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-    <div class="navbar">
-        <a href="/">Home</a>
-        <a href="/logout">Logout</a>
+<%- include("partials/header") %>
+
+<%- include("partials/navbar") %>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800">Welcome, <%= user.name %>!</h1>
+      <p class="text-gray-600 mt-2">Enjoy our exclusive cat collection</p>
     </div>
 
-    <div class="members-container">
-        <h1>Welcome to the Members Area, <%= user.name %>!</h1>
-        <p>Here's your special content:</p>
-        <img src="/<%= image %>" alt="Random Cat" class="members-image">
+    <!-- Responsive Image Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <% images.forEach(image => { %>
+        <div class="image-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+          <img 
+            src="/<%= image.src %>" 
+            alt="<%= image.alt %>" 
+            class="w-full h-48 object-cover"
+          >
+          <div class="p-4">
+            <h3 class="font-semibold text-gray-800"><%= image.title %></h3>
+            <p class="text-sm text-gray-600 mt-1"><%= image.alt %></p>
+          </div>
+        </div>
+      <% }); %>
     </div>
-</body>
-</html>
+  </main>
+
+ <%- include("partials/footer") %>

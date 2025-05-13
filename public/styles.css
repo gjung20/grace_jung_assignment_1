@@ -118,3 +118,7 @@ button:hover, .btn:hover {
     font-size: 72px;
     color: #d9534f;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

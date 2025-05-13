@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-    <div class="navbar">
-        <a href="/">Home</a>
-        <a href="/login">Login</a>
-    </div>
+<%- include("partials/header") %>
+
+<%- include("partials/navbar") %>
 
     <div class="form-container">
         <h1>Sign Up</h1>
@@ -36,5 +28,5 @@
         </form>
         <p>Already have an account? <a href="/login">Login</a></p>
     </div>
-</body>
-</html>
+
+    <%- include("partials/footer") %>
