@@ -39,9 +39,8 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <!-- For Each loop that loops through the users in the database and
-                             checks if the user is a normal user or an admin -->
-                            <% users.forEach(user => { %>
+                            <% for (let i = 0; i < users.length; i++) { 
+                                const user = users[i]; %>
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= user.name %></td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= user.email %></td>
@@ -71,7 +70,7 @@
                                         <% } %>
                                     </td>
                                 </tr>
-                            <% }); %>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
@@ -81,4 +80,4 @@
         </div>
     </main>
 
-    <%- include("partials/footer") %>
+<%- include("partials/footer") %>
