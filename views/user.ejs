@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+
+<main class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">User List</h1>
+    
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <% if (users.length > 0) { %>
+            <ol class="divide-y divide-gray-200">
+                <% for(let i = 0; i < users.length; i++) { %>
+                    <%- include('templates/user', {user: users[i], currentUser: currentUser}) %>
+                <% } %>
+            </ol>
+        <% } else { %>
+            <p class="text-gray-500 p-4">No users found.</p>
+        <% } %>
+    </div>
+</main>
+
+<%- include("partials/footer") %>

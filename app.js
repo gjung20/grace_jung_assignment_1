@@ -46,6 +46,11 @@ app.use(session({
   cookie: { maxAge: 3600000 }
 }));
 
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
+
 app.set('view engine', 'ejs');
 
 // Basic route that works before DB connection
@@ -71,7 +76,7 @@ connectToDatabase().then(database => {
   
   function isAdmin(req, res, next) {
     if (!req.session.user) return res.redirect('/login');
-    if (req.session.user.type !== 'admin') return res.status(403).send('Not authorized');
+    if (req.session.user.type !== 'admin') return res.status(403).render('403');
     next();
   }
 
@@ -122,8 +127,10 @@ connectToDatabase().then(database => {
   });  
 
   app.get('/login', (req, res) => {
-    // Pass an empty error initially
-    res.render('login', { error: null });
+    res.render('login', { 
+        error: null,
+        user: req.session.user || null  // Add this line
+    });
 });
 
 app.post('/login', async (req, res) => {
@@ -176,6 +183,26 @@ app.post('/login', async (req, res) => {
       user: req.session.user,
       images: images // Pass all images instead of random one
     });
+  });
+
+  app.get('/users', async (req, res) => {
+    try {
+      const users = await usersCollection.find({}, { 
+        projection: { password: 0 } 
+      }).toArray();
+      
+      res.render("users", {
+        users: users.map(user => ({
+          username: user.name,
+          email: user.email,
+          type: user.type || 'user'
+        })),
+        currentUser: req.session.user
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
+    }
   });
 
   // Admin Page
