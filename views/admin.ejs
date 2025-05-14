@@ -39,6 +39,8 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- For Each loop that loops through the users in the database and
+                             checks if the user is a normal user or an admin -->
                             <% users.forEach(user => { %>
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= user.name %></td>
